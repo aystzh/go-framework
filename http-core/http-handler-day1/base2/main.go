@@ -10,7 +10,7 @@ import (
 type Engine struct {
 }
 
-//实现ServeHTTP方法 有两个参数 一个是请求的响应  一个是请求信息
+//实现ServeHTTP方法 有两个参数 一个是请求的响应  一个是请求信息 注意是 ServeHTTP 不是 ServerHTTP
 func (engin *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	switch req.URL.Path {
 	case "/":
