@@ -1,7 +1,7 @@
 package gee
 
 type node struct {
-	patter   string  // 待匹配路由，例如 /p/:lang
+	pattern  string  // 待匹配路由，例如 /p/:lang
 	part     string  // 路由中的一部分，例如 :lang
 	children []*node //子节点 例如：[doc, tutorial, intro]
 	isWild   bool    //是否为精确匹配 part 含有 : 或 * 时为true
@@ -25,4 +25,17 @@ func (n *node) matchChildren(part string) []*node {
 			nodes = append(nodes, child)
 		}
 	}
+}
+func (n *node) insert(pattern string, parts []string, height int) {
+	if len(parts) == height {
+		n.pattern = pattern
+		return
+	}
+	part := parts[height]
+	child := n.matchChild(part)
+	if child == nil {
+		child = &node{part: part, isWild: parts[0] == ":" || parts[0] == "*"}
+		n.children = append(n.children, child)
+	}
+	child.insert(pattern, parts, height+1)
 }
