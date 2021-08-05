@@ -20,7 +20,7 @@ func (engin *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 			fmt.Fprintf(w, "Header[%q]=%q\n", k, v)
 		}
 	default:
-		fmt.Fprintf(w, "404 NOT FOUND : %S\n", req.URL)
+		fmt.Printf("test")
 	}
 }
 
